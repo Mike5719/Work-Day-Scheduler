@@ -7,8 +7,10 @@ var timeBlockTwoEl = $('#hour-2');
 var timeBlockThreeEl = $('#hour-3');
 var timeBlockFourEl = $('#hour-4');
 var timeBlockFiveEl = $('#hour-5');
+var taskDisplayEl = $('#task-display');
+var saveButton = $('#save');
 
-var DayHourBlocks = [9, 10, 11, 12, 1, 2, 3, 4, 5];
+var DayHourBlocks = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 var DayHourBlocksEl = [
   timeBlockNineEl,
   timeBlockTenEl,
@@ -20,6 +22,11 @@ var DayHourBlocksEl = [
   timeBlockFourEl,
   timeBlockFiveEl
 ];
+
+//display saved tasks TODO
+function renderTasks() {
+
+}
 
 function pastColor() {
     before.addClass('past');
@@ -40,12 +47,15 @@ console.log(timeNow);
 for (var i = 0; i < DayHourBlocks.length; i++) {
   if (DayHourBlocks[i] < timeNow) {
     var before = DayHourBlocksEl[i];
+    console.log(before);
    pastColor(before);
-  } else if (DayHourBlocks[i] = timeNow) {
+  } else if (DayHourBlocks[i] == timeNow) {
     var current = DayHourBlocksEl[i];
+    console.log(current);
     currentColor(current);
     } else {
       var later = DayHourBlocksEl[i];
+      console.log(later);
       futureColor(later);
     }
 }
@@ -80,3 +90,39 @@ $(function () {
 var today = dayjs().format('dddd,MMMM D, YYYY h:mm A');
 $('#currentDay').text(today);
 
+// function readTasksFromStorage() {
+//   var tasks = local.Storage.getItem('tasks');
+//     if (tasks) {
+//       tasks = JSON.parse(tasks);
+//     } else {
+//     tasks = [];
+//   }
+//   return tasks;
+// }
+
+function printTasksData () {
+
+}
+
+taskDisplayEl.addEventListener("click", function(event) {
+  event.preventDefault();
+  var element = event.target;
+
+  if(todoText === "") {
+    return;
+  }
+
+  
+  if (element.matches("button") === true) {
+   var li = document.createElement("li");
+   var todoText = todoInput.value.trim(); //TODO -DEFINE todoInput
+   li.textContent = todoText;
+   i = element.parentElement
+   console.log(i);
+   li.setAttribute("data-index", i);
+  }
+
+
+
+  
+});
